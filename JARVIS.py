@@ -185,10 +185,7 @@ if __name__ == "__main__":
         elif 'the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
-        elif 'the date' in query:
-            strdate = datetime.date(2021,1,2)
-            speak(strdate)
-
+        
         elif 'open code' in query:
             codePath = "C:\\Users\\hp\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\Visual Studio Code.lnk"
             os.startfile(codePath)
