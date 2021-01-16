@@ -219,7 +219,7 @@ if __name__ == "__main__":
 
 
         elif 'play music' in query:
-            music_dir = 'D:\\Non Critical\\songs\\Favorite Songs2'
+            music_dir = 'C:\\Non Critical\\songs\\Favorite Songs2'
             songs = os.listdir(music_dir)
             print(songs)    
             os.startfile(os.path.join(music_dir, songs[0]))
@@ -322,8 +322,9 @@ if __name__ == "__main__":
                 speak("Access Not Granted")
         
         elif 'jarvis exit' in query:
+            speak("Shut ing Down")
             exit(code="Shuting Down")
-            speak("Shut ing Down") 
+        
 # Talking to the User 
         elif 'what can you do' in query:
             speak("I can send emails(if configured), i can open many things in chrome, play music, do some encrypting decrypting, etcetera")
