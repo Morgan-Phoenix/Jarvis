@@ -188,6 +188,24 @@ if __name__ == "__main__":
             webbrowser.get('chrome').open_new_tab(url6)
             webbrowser.register('chrome',None)
             webbrowser.BackgroundBrowser("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe")
+        
+        elif 'open facebook' in query:
+            speak("Opening Facebook")
+            url7 = "https://www.facebook.com"
+            chrome_path="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+            webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
+            webbrowser.get('chrome').open_new_tab(url6)
+            webbrowser.register('chrome',None)
+            webbrowser.BackgroundBrowser("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe")
+        
+        elif 'open instagram' in query:
+            speak("Opening Instagram")
+            url8 = "https://www.instagram.com"
+            chrome_path="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+            webbrowser.register('chrome', None,webbrowser.BackgroundBrowser(chrome_path))
+            webbrowser.get('chrome').open_new_tab(url6)
+            webbrowser.register('chrome',None)
+            webbrowser.BackgroundBrowser("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe")
 
         elif 'open this url' in query:
             speak("Please Write the URL")
@@ -210,7 +228,7 @@ if __name__ == "__main__":
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
 
-        elif 'open code' in query:
+        elif 'open editor' in query:
             codePath = "C:\\Users\\hp\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\Visual Studio Code.lnk"
             os.startfile(codePath)
     
