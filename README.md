@@ -1,11 +1,13 @@
 # Jarvis
 Requirements:
     Using Python 3.9.1.
-    4 downloaded Modules.
+    6 downloaded Modules.
     *pyttsx3.
     *speech_recognition.
     *Wikipedia.
     *pyaudio(without importing)
+    *subprosses.
+    *ctypes.
 
 Used Modules:
     *os.
@@ -15,6 +17,9 @@ Used Modules:
     *datetime.
     *smtplib.
     *binhex.
+    *pyjokes.
+    *winshell.
+    *notify.
     
 Passwords:
     Encrypt = 1234567890@morgan
@@ -70,3 +75,17 @@ How to exit the program?
     NOTE:- YOU CANT STOP THE PROGRAM WHILE IT IS DOING SOMETHING LIKE SEARCHING SOMETHING ON WIKIPEDIA,
     THAT MEANS YOU CANT STOP THE PROGRAM WHEN IT IS DOING A TASK.
     So, it will only work when the program is listning.
+
+NOTE: All paths in the program are of my computer, some tasks that require path may not work, to make them work please write the correct path.
+
+Updates:
+    Now you can type and search wikipedia.
+    Now jarvis can open powerpoint and excel(if correct path is proivded)
+    Now jarvis can tell you jokes just say "tell me a joke"
+    System actions:(can perform)
+        shutdown say "shutdown system"
+        sleep say "sleep"
+        restart say "restart"
+        lock the device (like we do win key + L) say "lock window"
+        clear recycle bin say "empty recycle bin"
+    Now jarvis can send notifications when requried.

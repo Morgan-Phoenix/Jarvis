@@ -1,15 +1,20 @@
+import base64
+import binhex
+import ctypes
 import datetime
 import os
 import smtplib
+import subprocess
 import time
 import webbrowser
-import base64
-import binhex
 
+import pyjokes #pip install pyjokes
 import pyttsx3  # pip install pyttsx3
 import speech_recognition as sr  # pip install speechRecognition
 #  pip install pyaudio(In Case Of Error Saying "no module named pyaudio")
 import wikipedia  # pip install wikipedia
+import winshell # pip instsll winshell
+import notify # pip install notify
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -47,8 +52,8 @@ def takeCommand():
         print(f"User said: {query}\n")
 
     except Exception as e:
-        del e
-        speak("This Is Not In My Program Sir")
+        del e 
+        pass 
         return "None"
     return query
 
@@ -112,11 +117,18 @@ if __name__ == "__main__":
     while True:
         query = takeCommand().lower()
 
-        # Logic for executing tasks based on query
+# tasks based on query
+
         if 'wikipedia' in query:
-            speak("Do You Want To Type Or Do You Want To Speak Your Question")
+            speak('Searching Wikipedia...')
+            query = query.replace("wikipedia", "")
+            results = wikipedia.summary(query, sentences=20)
+            speak("According to Wikipedia")
+            print(results)
+            speak(results)
+            speak("if i did not get you, you can type your question")
             search = takeCommand()
-            if 'type' in search:
+            if 'i want to type' in search:
                 speak("Type Your Question")
                 tsearch = input("Here ")
                 speak('Searching Wikipedia...')
@@ -125,13 +137,9 @@ if __name__ == "__main__":
                 speak("According to Wikipedia")
                 print(results)
                 speak(results)
-            if 'speak' in search:
-                speak('Searching Wikipedia...')
-                query = query.replace("wikipedia", "")
-                results = wikipedia.summary(query, sentences=20)
-                speak("According to Wikipedia")
-                print(results)
-                speak(results)
+            elif 'do not want to type' in query or 'you got me' in query:
+                speak("ok, not searching")
+                pass
 
         elif 'open youtube' in query:
             speak("Opening youtube")
@@ -209,6 +217,7 @@ if __name__ == "__main__":
 
         elif 'open this url' in query:
             speak("Please Write the URL")
+            notify.notification('Please Write The URL','Requset')
             ourl = input("Here  ") 
             speak("Opening")
             chrome_path="C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
@@ -231,6 +240,14 @@ if __name__ == "__main__":
         elif 'open editor' in query:
             codePath = "C:\\Users\\hp\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Visual Studio Code\\Visual Studio Code.lnk"
             os.startfile(codePath)
+
+        elif 'open powerpoint' in query:
+            powerpoint = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\PowerPoint.lnk"
+            os.startfile(powerpoint)
+
+        elif 'open excel' in query:
+            excel = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Excel.lnk"
+            os.startfile(excel)
     
         elif 'calculator' in query:
             try:
@@ -259,6 +276,7 @@ if __name__ == "__main__":
                     speak("Time is up")
         elif "encrypt text" in query:
             speak("Please Write The Password Sir")
+            notify.notification('Please Write The Password','Alert')
             passw = input("Here ")
             if passw == "1234567890@morgan":
                 speak("Access Granted")
@@ -272,11 +290,13 @@ if __name__ == "__main__":
 
         elif "decrypt text" in query:
             speak("Please Write The Password Sir")
+            notify.notification('Please Write The Password','ALert')
             passwo = input("Here ")
             if passwo == "1234567890@morgan-phoenix":
                 speak("Access Granted")
                 time.sleep(1.1)
                 speak("Sir, Please Write The Encrypted Text ")
+                notify.notification('Please Write The Text To Encrypt','Request')
                 text = input("Here  ")
                 decrypter(text)
             else:
@@ -285,6 +305,7 @@ if __name__ == "__main__":
         elif 'send a email' in query:
             epass = "emailunlock@3540P"
             speak("Please Write The Password")
+            notify.notification('Please Write The Password','Alert')
             epass_t = input("Here ")
             if epass_t == epass:
                 speak("Access Granted")
@@ -304,15 +325,18 @@ if __name__ == "__main__":
         
         elif 'encrypt file' in query:
             filepass = "fileencrypto368OP0"
-            speak("Please Write the password")
+            speak("Please Write The Password")
             filepass_test = input("Here ")
+            notify.notification('Please Write The Password','Alert')
             if filepass == filepass_test:
                 try:
                     speak("Access Granted")
                     time.sleep(1.1)
                     speak("Please write the file path that you want to encrypt")
+                    notify.notification('Please Write The File Path That You Want To Encrypt','Request')
                     infile = input("Here ")
                     speak("Please write file path in which you want to collect the output")
+                    notify.notification('Please Write File Path In Which You Want To Collect The Output')
                     outfile = input("Here ")
                     encrypt_file(infile,outfile)
                 except Exception as e:
@@ -320,14 +344,34 @@ if __name__ == "__main__":
                     speak("Something Went Wrong")
             else:
                 speak("Access Not Granted")
-        
+# System actions
+ 
+        elif 'lock window' in query:
+                speak("locking the device")
+                ctypes.windll.user32.LockWorkStation()
+             
+        elif 'hibernate' in query or "sleep" in query:
+            speak("Hibernating")
+            subprocess.call("shutdown / h")
+ 
+        elif 'shutdown system' in query:
+                speak("Hold On a Sec ! Your system is on its way to shut down")
+                subprocess.call('shutdown / p /f')
+       
+        elif 'restart' in query:
+            subprocess.call(["shutdown", "/r"])
+
+        elif 'empty recycle bin' in query:
+            winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
+            speak("Recycle Bin Recycled")
+# Exit
         elif 'jarvis exit' in query:
             speak("Shut ing Down")
             exit(code="Shuting Down")
         
 # Talking to the User 
         elif 'what can you do' in query:
-            speak("I can send emails(if configured), i can open many things in chrome, play music, do some encrypting decrypting, etcetera")
+            speak("I can send emails(if configured), i can open many things in chrome, play music, do some encrypting decrypting,open power point and excel, if you give the write path, etcetera")
         
         elif 'hello' in query:
             speak("Hello sir, how can i help you")
@@ -341,13 +385,23 @@ if __name__ == "__main__":
         elif 'i am fine' in query:
             speak("that is nice, please tell me how may i help you?")
 
-        elif 'what is in your program' in query:
+        elif 'then what is in your program' in query:
             speak("I am in devloping stage please forgive me if i missed something.")
+        elif 'bye' in query:
+            speak("Bye sir") 
+        
+        elif 'joke' in query:
+            speak("Here You Go")
+            time.sleep(1.0)
+            speak(pyjokes.get_joke())
 
         elif 'thank you'in query:
             speak("Welcom Sir")
 
         else:
+            speak("i don't know want you want, should i search the web?")
+            y = takeCommand()
+            if 'yes' in y:
                 speak("How Much Details You Want? Less Details, More Details, All details")
                 details = takeCommand()
                 if "less" in details:
@@ -359,7 +413,7 @@ if __name__ == "__main__":
                     except Exception as e:
                         del e
                         speak("Sorry Sir, I Did not found Anything")
-                if "more" in details:
+                elif "more" in details:
                     try:
                         speak('searching...')
                         query = query.replace("wikipedia", "")
@@ -368,7 +422,7 @@ if __name__ == "__main__":
                     except Exception as e:
                         del e
                         speak("Sorry Sir, I Did not found Anything")
-                if "all" in details:
+                elif "all" in details:
                     try:
                         speak('searching...')
                         query = query.replace("wikipedia", "")
@@ -377,3 +431,14 @@ if __name__ == "__main__":
                     except Exception as e:
                         del e
                         speak("Sorry Sir, I Did not found Anything")
+                elif 'tell me more' in query:
+                    speak('searching...')
+                    query = query.replace("wikipedia", "")
+                    result = results
+                    results = wikipedia.summary(query, sentences=200)
+                    if results == result:
+                        speak("There is no more content provided on your question sir")
+                    else:
+                        speak(results)
+            elif 'no' in query:
+                speak("OK!")
